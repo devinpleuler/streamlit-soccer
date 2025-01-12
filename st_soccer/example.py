@@ -18,7 +18,7 @@ def get_sample_data(limit=1000):
 
     frames = []
     home_team = dataset.metadata.teams[0]
-    for i, f in enumerate(dataset.frames):
+    for f in dataset.frames:
         frame_data = []
         for player, coordinates in f.players_coordinates.items():
             attrs = {
