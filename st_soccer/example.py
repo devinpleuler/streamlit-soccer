@@ -47,4 +47,4 @@ def get_sample_data(limit=1000):
 st.set_page_config(page_title="Tactics Board", page_icon=":soccer:")
 if __name__ == "__main__":
     frames = get_sample_data()
-    result = TrackingComponent(frames=frames, home_color=RED, away_color=BLUE, loop="yes")
+    tc = TrackingComponent(frames=frames, home_color=RED, away_color=BLUE, loop="yes")

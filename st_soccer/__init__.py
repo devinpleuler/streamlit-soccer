@@ -7,5 +7,5 @@ build_dir = os.path.join(parent_dir, "frontend/build")
 component = components.declare_component("st_soccer", path=build_dir)
 
 
-def TrackingComponent(frames, key=None, animate=True, **kwargs):
+def TrackingComponent(frames=[], key=None, animate=True, **kwargs):
     return component(frames=json.dumps(frames), animate=animate, key=key, **kwargs)
