@@ -19,26 +19,27 @@ def get_sample_data(limit=1000):
     frames = []
     home_team = dataset.metadata.teams[0]
     for i, f in enumerate(dataset.frames):
+        frame_data = []
         for player, coordinates in f.players_coordinates.items():
             attrs = {
                 "x": coordinates.x,
                 "y": coordinates.y,
                 "team": "home" if player.team == home_team else "away",
-                "frame": i,
             }
-            frames.append(attrs)
+            frame_data.append(attrs)
 
         try:
             ball_x, ball_y = f.ball_coordinates.x, f.ball_coordinates.y
             attrs = {
                 "x": ball_x,
                 "y": ball_y,
-                "frame": i,
                 "team": "ball",
             }
-            frames.append(attrs)
+            frame_data.append(attrs)
         except AttributeError:
             pass  # No ball coordinates
+
+        frames.append(frame_data)
 
     return frames
 

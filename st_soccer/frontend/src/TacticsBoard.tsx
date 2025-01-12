@@ -46,7 +46,7 @@ function TacticsBoard({ args, disabled, theme }: ComponentProps): ReactElement {
     let y = d3.scaleLinear().domain([0, 1]).range([0, 68]);
 
     function updateData(frame: any): void {
-      let frameData = trackingData.filter((d: any) => d.frame == frame);
+      let frameData = trackingData[frame];
 
       let u = plot_layer.selectAll('circle')
       .data(frameData, (d: any) => parseInt(d.player) || 0);
