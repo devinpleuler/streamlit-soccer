@@ -1,7 +1,7 @@
 import streamlit as st
 import json
 from kloppy import metrica
-from st_soccer import TrackingAnimator
+from st_soccer import TrackingComponent
 
 BLUE = "#2b83ba"
 RED = "#d7191c"
@@ -45,6 +45,5 @@ def get_sample_data(limit=1000):
 
 st.set_page_config(page_title="Tactics Board", page_icon=":soccer:")
 if __name__ == "__main__":
-    frames = get_sample_data()
-    data = {"frames": frames, "home_color": BLUE, "away_color": RED}
-    result = TrackingAnimator(json.dumps(data))
+    frames = get_sample_data(limit=50)
+    result = TrackingComponent(frames=frames, home_color=RED, away_color=BLUE, loop="no")

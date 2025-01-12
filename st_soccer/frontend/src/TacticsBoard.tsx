@@ -17,17 +17,19 @@ import * as d3Soccer from "d3-soccer"
 
 function TacticsBoard({ args, disabled, theme }: ComponentProps): ReactElement {
 
-  const [homeColor, setHomeColor] = useState("pink")
-  const [awayColor, setAwayColor] = useState("orange")  
+  const [homeColor, setHomeColor] = useState("red")
+  const [awayColor, setAwayColor] = useState("blue")  
+  const [loop, setLoop] = useState("yes")
+  const [frameRate, setFrameRate] = useState(30)
 
-  const data = JSON.parse(args['name'])
-  const trackingData = data['frames']
+  const trackingData = JSON.parse(args['frames'])
   const pitchRef = useRef<HTMLDivElement>(null)
 
-
   useEffect(() => {
-    setHomeColor(data['home_color'])
-    setAwayColor(data['away_color'])
+    if (args['home_color']) setHomeColor(args['home_color'])
+    if (args['away_color']) setAwayColor(args['away_color'])
+    if (args['loop']) setLoop(args['loop'])
+    if (args['frame_rate']) setFrameRate(args['frame_rate'])
   }, [args])
 
 
@@ -37,7 +39,6 @@ function TacticsBoard({ args, disabled, theme }: ComponentProps): ReactElement {
     d3.select(pitchRef.current).selectAll("*").remove()
     const _pitch = d3Soccer.pitch().height(450).pitchStrokeWidth(0.3)
     const pitch = d3.select(pitchRef.current).call(_pitch).style("background-color", "white")
-    const frameRate = 30 //fps
 
     const plot_layer = pitch.select(".above")
 
@@ -66,8 +67,8 @@ function TacticsBoard({ args, disabled, theme }: ComponentProps): ReactElement {
     let frames = d3.max(trackingData, (d: any) => parseInt(d.frame));
     var i = 0
     setInterval(function(){
-        i = i === frames ? 0 : i + 1;
-        updateData(i)
+      i = i === frames ? (loop === "yes" ? 0 : frames) : i + 1;
+      updateData(i)
     }, 1000/frameRate);
 
     Streamlit.setFrameHeight()
