@@ -1,5 +1,4 @@
 import streamlit as st
-import json
 from kloppy import metrica
 from st_soccer import TrackingComponent
 
@@ -47,4 +46,57 @@ def get_sample_data(limit=1000):
 st.set_page_config(page_title="Tactics Board", page_icon=":soccer:")
 if __name__ == "__main__":
     frames = get_sample_data()
+
+    st.markdown("## `streamlit-soccer`")
+    st.caption("[Source Code](https://github.com/devinpleuler/streamlit-soccer)")
+
     tc = TrackingComponent(frames=frames, home_color=RED, away_color=BLUE, loop="yes")
+
+    st.markdown(
+        """        
+        ## What is this?
+        
+        This is a custom react component for [Streamlit](https://streamlit.io/) that allows you to display soccer tracking data.
+        
+        It is built on top of `d3-soccer` by [Pieter Robberects](https://bsky.app/profile/probberechts.bsky.social), and the animation logic is mostly lifted from his lovely [Observable notebook](https://observablehq.com/@probberechts/animating-tracking-data).
+        
+        The sample data is sourced from the [Metrica Sports Sample Data](https://github.com/metrica-sports/sample-data) repository, and the example code utilizes the [`kloppy`](https://kloppy.pysport.org/) library to load the data.
+        
+        The component is built from Streamlit's `component-template` repository.
+
+        Since it's all open-source, it's easy to deploy to Streamlit Community Cloud.
+        
+        ## How to use it?
+        
+        It's still a bit fragile, and currently on release version `0.0.1`.
+        
+        Would absolutely love community help building it out to add additional features. Pull Requests (and) very welcome.
+        
+        To install the component, run the following command:
+        ```bash
+        pip install streamlit-soccer
+        ```
+        
+        In python, with streamlit, you can do the following:
+        ```python
+        import streamlit as st
+        from st_soccer import TrackingComponent
+        
+        frames = [
+            [
+                {"x": 0, "y": 0, "team": "home"},
+                {"x": 10, "y": 10, "team": "away"},
+                {"x": 20, "y": 20, "team": "ball"},
+                ...
+            ], 
+            ...
+        ]
+        
+        tc = TrackingComponent(
+            frames=frames, 
+            home_color="#d7191c", 
+            away_color="#2b83ba", 
+            loop="yes")
+        ```
+        """
+    )
