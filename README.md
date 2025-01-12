@@ -2,7 +2,7 @@
 
 A custom react component for Streamlit for working with soccer tracking data.
 
-[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)]([URL_TO_YOUR_APP](https://st-soccer.streamlit.app/))
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://st-soccer.streamlit.app/)
 
 ## Install
 
